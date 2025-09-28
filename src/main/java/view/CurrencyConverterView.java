@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class CurrencyConverterView extends Application {
 
     private CurrencyConverterController controller;
+    private Button convertButton = new Button("Convert");
     private ChoiceBox<String> currencySelector1 = new ChoiceBox<>();
     private ChoiceBox<String> currencySelector2 = new ChoiceBox<>();
     private TextField field2 = new TextField();
@@ -79,7 +80,6 @@ public class CurrencyConverterView extends Application {
         selectors.getChildren().add(toSelector);
         selectors.setAlignment(Pos.CENTER);
 
-        Button convertButton = new Button("Convert");
         buttonBox.getChildren().add(convertButton);
         buttonBox.getChildren().add(errorMessages);
         buttonBox.setAlignment(Pos.CENTER);
@@ -110,6 +110,10 @@ public class CurrencyConverterView extends Application {
 
     public void displayMessage(String text) {
         errorMessages.setText(text);
+    }
+
+    public void disableConvertButton() {
+        convertButton.setDisable(true);
     }
 
     public void setTextInField2(String text) {

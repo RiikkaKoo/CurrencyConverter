@@ -3,14 +3,20 @@ package dao;
 import java.sql.*;
 
 import datasource.MariaDBConnection;
-import entity.CurrencyType;
 
 import java.util.*;
 
 public class CurrencyDao {
 
-    public double getRate(String abbreviation) {
-        Connection conn = MariaDBConnection.getConnection();
+    public double getRate(String abbreviation) throws Exception {
+        Connection conn;
+        try {
+            conn = MariaDBConnection.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
+        }
+
         String sql = "SELECT rate FROM currency WHERE abbreviation=?";
         double rate = 0;
 
@@ -30,8 +36,15 @@ public class CurrencyDao {
         return rate;
     }
 
-    public ArrayList<String> getAbbreviations() {
-        Connection conn = MariaDBConnection.getConnection();
+    public ArrayList<String> getAbbreviations() throws Exception {
+        Connection conn;
+        try {
+            conn = MariaDBConnection.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
+        }
+
         String sql = "SELECT abbreviation FROM currency";
         ArrayList<String> abbreviations = new ArrayList<>();
 

@@ -8,7 +8,7 @@ public class MariaDBConnection {
 
     private static Connection conn = null;
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws Exception {
         if (conn==null) {
             try {
                 conn = DriverManager.getConnection(
@@ -16,6 +16,7 @@ public class MariaDBConnection {
             } catch (SQLException e) {
                 System.out.println("Connection failed.");
                 e.printStackTrace();
+                throw new Exception("Database connection failed.");
             }
             return conn;
         }
@@ -27,7 +28,7 @@ public class MariaDBConnection {
     public static void terminate() {
         try {
             getConnection().close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

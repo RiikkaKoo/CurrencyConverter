@@ -20,8 +20,13 @@ public class CurrencyConverterController {
     }
 
     public void getCurrencies() {
-        ArrayList<String> currencies = dao.getAbbreviations();
-        view.updateChoiceBoxes(currencies);
+        try {
+            ArrayList<String> currencies = dao.getAbbreviations();
+            view.updateChoiceBoxes(currencies);
+        } catch (Exception e) {
+            view.displayMessage(e.getMessage());
+            view.disableConvertButton();
+        }
     }
 
     private boolean checkIfDouble(String input) {
